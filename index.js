@@ -15,8 +15,8 @@ const authenticateUser = require('./middleware/authentication')
 
 
 //middleware
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
 app.use(helmet())
 app.use(morgan("common"))
 
