@@ -3,6 +3,7 @@ const app = express()
 require('dotenv').config()
 const helmet = require("helmet")
 const morgan = require("morgan")
+const cors = require("cors")
 const mongoose = require("mongoose")
 const connectDB = require("./db/connect")
 const userRoutes = require("./routes/users")
@@ -15,6 +16,7 @@ const authenticateUser = require('./middleware/authentication')
 
 //middleware
 app.use(express.json())
+app.use(cors())
 app.use(helmet())
 app.use(morgan("common"))
 
