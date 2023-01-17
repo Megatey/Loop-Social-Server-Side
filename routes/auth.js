@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
     console.log(user);
 } catch (error) {
       console.log(error, "something occured");
-    if (e.message.includes("E11000")) {
+    if (e.message.includes("Network Error")) {
       return res.status(500).json({
         message: "This Email Already Used try with another email",
         success: false,
