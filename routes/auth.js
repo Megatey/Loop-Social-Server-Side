@@ -4,14 +4,20 @@ const User = require("../models/User");
 //REGISTER USER
 router.post("/register", async (req, res) => {
   try {
+    const findOneEmail = await User.findOne({ email: req.body.email });
+    if (findOneEmail) {
+      return res
+      .status(404)
+      .json({ status: "false", msg: "This Email Already Used try with another email"});
+    }
     const user = await User.create({ ...req.body });
     const token = await user.createJwT();
     res
       .status(201)
       .json({ status: "Success", username: user.name, token, user });
     console.log(user);
-} catch (error) {
-      console.log(error, "something occured");
+  } catch (error) {
+    console.log(error, "something occured");
     if (e.message.includes("Network Error")) {
       return res.status(500).json({
         message: "This Email Already Used try with another email",
